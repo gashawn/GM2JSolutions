@@ -8,13 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: SDLC Context Setup
-        run: |
-          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            echo "ENV=production" >> $GITHUB_ENV
-          else
-            echo "ENV=staging" >> $GITHUB_ENV
-          fi
       - name: Terraform Plan (IaC Audit)
         run: terraform plan -out=tfplan
-        working-directory: ./environments/${{ env.ENV }}
+        working-directory: ./environments/${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
