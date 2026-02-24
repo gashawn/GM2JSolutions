@@ -1,6 +1,7 @@
 # STAGING Environment Configuration
 # SDLC Tier: Staging (Validation)
 # Compliance Target: SOC2-Ready
+# Estimated Monthly Burn: ~$30.00
 
 terraform {
   required_version = ">= 1.5"
@@ -46,7 +47,7 @@ resource "aws_wafv2_web_acl" "main" {
   }
 }
 
-# 3. COMPUTE (Auto-Scaling per Scale Requirement: medium)
+# 3. COMPUTE (Auto-Scaling per Scale Requirement: low)
 module "asg" {
   source = "terraform-aws-modules/autoscaling/aws"
   version = "~> 6.0"
