@@ -1,17 +1,3 @@
-variable "aws_region" {
-  description = "AWS region"
-  type        = string
-  default     = "us-east-1"
-}
-
-variable "project_name" {
-  description = "Name of the project"
-  type        = string
-  default     = "gm2j-enterprise-stack"
-}
-
-variable "environment" {
-  description = "Environment name"
-  type        = string
-  default     = "production"
-}
+variable "aws_region" { type = string; default = "us-east-1" }
+variable "project_name" { type = string; default = "gm2j-secure-web-app" }
+variable "environment" { type = string; default = "production" }
