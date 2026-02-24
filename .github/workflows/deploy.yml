@@ -1,26 +1,19 @@
-name: Terraform Deploy
+name: Infrastructure Sync
 on:
   push:
     branches: [ main ]
 jobs:
-  terraform:
-    name: 'Terraform'
+  validate:
     runs-on: ubuntu-latest
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v2
+      - name: Terraform Format
+        run: terraform fmt -check
+        working-directory: ./infrastructure
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -backend=false
         working-directory: ./infrastructure
-      - name: Terraform Plan
-        run: terraform plan
-        working-directory: ./infrastructure
-      - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve
+      - name: Terraform Validate
+        run: terraform validate
         working-directory: ./infrastructure
