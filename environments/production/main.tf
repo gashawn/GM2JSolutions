@@ -1,6 +1,7 @@
 # PRODUCTION Environment Configuration
 # SDLC Tier: Production (Critical)
 # Compliance Target: SOC2-Ready
+# Estimated Monthly Burn: ~$525.00
 
 terraform {
   required_version = ">= 1.5"
