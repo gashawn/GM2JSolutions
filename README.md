@@ -1,11 +1,12 @@
-# gm2j-enterprise-stack Infrastructure
+# gm2j-secure-web-app - High Security Web Stack
 
-Automated AWS Infrastructure following the **AWS Well-Architected Framework**.
+Infrastructure as Code (IaC) baseline following the **AWS Well-Architected Framework**.
 
-## Architecture Overview
-- **Reliability:** Multi-AZ VPC configuration.
-- **Security:** Tiered subnets (Public/Private) with scoped Security Groups.
-- **Cost Optimization:** Conditional NAT Gateway usage based on environment.
-
-## Deployment
-This repository uses GitHub Actions for automated Terraform execution.
+## Architecture Components
+- **Network:** VPC with isolated Public, Private, and Database tiers.
+- **Compute:** Auto Scaling Group (EC2) behind an Application Load Balancer.
+- **Security:** ALB protected by AWS WAF v2 (Common Rule Set).
+- **Database:** RDS PostgreSQL with encrypted storage in private subnets.
+- **Storage:** Private S3 bucket with AES256 encryption & versioning.
+- **Audit:** CloudTrail enabled for cross-region audit logging.
+- **Monitoring:** CloudWatch metrics enabled for WAF and ALB.
